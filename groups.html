@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="css/groups.css">
     <title>TCC - 3RM</title>
 </head>
-<body>
+<body class="light-mode">
     <nav>
         <img src="assets/SENAI_São_Paulo_logo.png" alt="LOGO SENAI">
         
-        <button type="button"><i class="fa-regular fa-moon"></i></button>
+        <button onclick="toggleDarkMode()" type="button"><i id="darkModeIcon" class="fa-regular fa-moon"></i></button>
     </nav>
 
     <main>
 
         <section class="ise-group">
-
-            <div class="ise">
-                <img src="assets/isi.png" alt="Instituto SENAI de inovação">
-            </div>
             
+            <div class="ise">
+                <a href="pessoas_isi.html"><img src="assets/isi.png" alt="Instituto SENAI de inovação"></a>
+            </div>
+                     
             <div class="txt">
                 <h1>Instituto SENAI de inovação</h1>
                 <p> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -31,7 +31,7 @@
         <section class="arduino-group">
 
             <div class="ise">
-                <img src="assets/isi.png" alt="Instituto SENAI de inovação">
+                <a href="#"><img src="assets/isi.png" alt="Instituto SENAI de inovação"></a>
             </div>
             
             <div class="txt">
@@ -43,7 +43,7 @@
         <section class="chamado-group">
 
             <div class="ise">
-                <img src="assets/isi.png" alt="Instituto SENAI de inovação">
+                <a href="#"><img src="assets/isi.png" alt="Instituto SENAI de inovação"></a>
             </div>
             
             <div class="txt">
@@ -54,5 +54,6 @@
 
     </main>
 
+    <script src="js/script.js"></script>
 </body>
 </html>
