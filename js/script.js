@@ -31,31 +31,54 @@ document.addEventListener('DOMContentLoaded', function () {
     for (var i = 0; i < squares.length; i++) {
         squares[i].addEventListener('click', function () {
             var content = this.getAttribute('data-content');
-            openPopup(content);
+            var infoArray = content.split(';');
+            var name = infoArray[0];
+            var additionalInfo = infoArray.slice(1).join('<br>'); // Separa as informações com quebra de linha
+            var linkedinLink = infoArray.find(item => item.toLowerCase().includes('linkedin'));
+            openPopup(name, additionalInfo, linkedinLink);
         });
     }
 
-    // Adiciona um ouvinte de eventos de clique no pop-up para fechá-lo
-    var popup = document.getElementById('popup');
-    popup.addEventListener('click', function (event) {
-        if (event.target === popup) {
-            closePopup();
+    function openPopup(name, additionalInfo, linkedinLink) {
+        var popupContent = document.getElementById('popup-content');
+        var popupName = document.getElementById('popup-name');
+        var popupInfo = document.getElementById('popup-info');
+        var popupLinkedinLink = document.getElementById('linkedin-link');
+    
+        popupName.innerHTML = `<span style="color: #3498db">${name}</span>`;
+        popupInfo.innerHTML = additionalInfo;
+    
+        if (linkedinLink) {
+            popupLinkedinLink.setAttribute('href', linkedinLink);
+            popupLinkedinLink.style.display = 'block';
+        } else {
+            popupLinkedinLink.style.display = 'none';
         }
-    });
+    
+        document.getElementById('popup').style.display = 'block';
+    }
+    
+    function addLinks(infoArray, linkedinLink) {
+        linkedinLink.innerHTML = ""; // Limpa os links existentes
+    
+        for (var i = 3; i < infoArray.length; i++) {
+            var linkInfo = infoArray[i].split(':');
+            var linkText = linkInfo[0].trim();
+            var linkValue = linkInfo[1].trim();
+    
+            if (linkText.toLowerCase() === 'linkedin') {
+                linkedinLink.setAttribute('href', linkValue);
+                linkedinLink.style.display = 'block'; // Mostra o link do LinkedIn
+                linkedinLink.innerHTML = `<i class="fab fa-linkedin"></i> Visitar LinkedIn`;
+            }
+            // Adicione mais lógica para outros tipos de links, se necessário
+        }
+    }
+    
+    
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
 
-    // Adiciona um ouvinte de eventos de clique no botão de fechar do pop-up
-    var closeButton = document.querySelector('.popup-content .close');
-    closeButton.addEventListener('click', function () {
-        closePopup();
-    });
 });
 
-function openPopup(content) {
-    var popupContent = document.getElementById('popup-content');
-    popupContent.innerHTML = content;
-    document.getElementById('popup').style.display = 'block';
-}
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-}

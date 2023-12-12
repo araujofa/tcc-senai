@@ -22,9 +22,16 @@ div.square
     align-items: center
     justify-content: space-evenly
     color: white
+    transition: 0.5s
     img
-        width: 50%
+        width: 125px
+        height: 125px
         filter: drop-shadow(5px 5px 5px #3a3a3a)
+        border-radius: 100px
+        background-color: #f7f7f7
+
+div.square:hover
+    transform: scale(110%)
 
 .popup 
     display: none
@@ -41,9 +48,10 @@ div.square
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-    background-color: #ff3f3f
-    padding: 20px
+    background-color: #fff
+    padding: 100px
     border-radius: 5px
+    color: black !important
 
 .close 
     position: absolute
