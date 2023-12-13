@@ -28,13 +28,14 @@ applyThemeFromLocalStorage();
 
 document.addEventListener('DOMContentLoaded', function () {
     var squares = document.getElementsByClassName('square');
+
     for (var i = 0; i < squares.length; i++) {
         squares[i].addEventListener('click', function () {
             var content = this.getAttribute('data-content');
+            var linkedinLink = this.getAttribute('data-linkedin');
             var infoArray = content.split(';');
             var name = infoArray[0];
-            var additionalInfo = infoArray.slice(1).join('<br>'); // Separa as informações com quebra de linha
-            var linkedinLink = infoArray.find(item => item.toLowerCase().includes('linkedin'));
+            var additionalInfo = infoArray.slice(1).join('<br>');
             openPopup(name, additionalInfo, linkedinLink);
         });
     }
@@ -44,41 +45,25 @@ document.addEventListener('DOMContentLoaded', function () {
         var popupName = document.getElementById('popup-name');
         var popupInfo = document.getElementById('popup-info');
         var popupLinkedinLink = document.getElementById('linkedin-link');
-    
+
         popupName.innerHTML = `<span style="color: #3498db">${name}</span>`;
         popupInfo.innerHTML = additionalInfo;
-    
+
         if (linkedinLink) {
             popupLinkedinLink.setAttribute('href', linkedinLink);
-            popupLinkedinLink.style.display = 'block';
+            popupLinkedinLink.style.display = 'inline-block';
         } else {
             popupLinkedinLink.style.display = 'none';
         }
-    
+
         document.getElementById('popup').style.display = 'block';
     }
-    
-    function addLinks(infoArray, linkedinLink) {
-        linkedinLink.innerHTML = ""; // Limpa os links existentes
-    
-        for (var i = 3; i < infoArray.length; i++) {
-            var linkInfo = infoArray[i].split(':');
-            var linkText = linkInfo[0].trim();
-            var linkValue = linkInfo[1].trim();
-    
-            if (linkText.toLowerCase() === 'linkedin') {
-                linkedinLink.setAttribute('href', linkValue);
-                linkedinLink.style.display = 'block'; // Mostra o link do LinkedIn
-                linkedinLink.innerHTML = `<i class="fab fa-linkedin"></i> Visitar LinkedIn`;
-            }
-            // Adicione mais lógica para outros tipos de links, se necessário
-        }
-    }
-    
-    
+
+    document.getElementById('closeButton').addEventListener('click', function () {
+        closePopup();
+    });
+
     function closePopup() {
         document.getElementById('popup').style.display = 'none';
     }
-
 });
-
